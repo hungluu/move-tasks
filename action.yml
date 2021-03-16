@@ -1,0 +1,13 @@
+name: 'move-tasks'
+description: 'Github action to move tasks on Github projects'
+author: 'Hung Luu <hungluu2106@gmail.com>'
+inputs:
+  ACTION_TOKEN:
+    required: true
+    description: 'Github token with required permissions on Projects & Issues'
+  PROJECT_ID:
+    required: true
+    description: 'Id of project to move tasks into'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

@@ -7,7 +7,7 @@
   "scripts": {
     "start": "tsc --watch",
     "build": "tsc",
-    "package": "npm run build && ncc build --source-map --license LICENSE -o action"
+    "package": "yarn build && ncc build --source-map --license LICENSE -o action"
   },
   "repository": {
     "type": "git",

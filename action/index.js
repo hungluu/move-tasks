@@ -42,14 +42,17 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         const token = core.getInput('ACTION_TOKEN');
         const projectId = parseInt(core.getInput('PROJECT_ID'));
+        core.info(`Action running for project #${projectId}`);
         const octokit = github.getOctokit(token);
+        core.info('Got octokit');
         const project = yield octokit.projects.listColumns({
             project_id: projectId
         });
+        core.info('Got project');
         console.log(project.data);
     });
 }
-run().catch(error => core.setFailed(error.message));
+run().catch((err) => { var _a; return core.setFailed((_a = err.stack) !== null && _a !== void 0 ? _a : err.message); });
 
 
 /***/ }),

@@ -8,8 +8,6 @@ on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
-      ACTION_TOKEN:
-        required: true
       PROJECT_ID:
         required: true
 
@@ -25,5 +23,5 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          ACTION_TOKEN: ${{ github.event.inputs.ACTION_TOKEN }}
+          ACTION_TOKEN: ${{ secrets.TEST_ACTION_TOKEN }}
           PROJECT_ID: ${{ github.event.inputs.PROJECT_ID }}

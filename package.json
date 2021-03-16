@@ -1,0 +1,39 @@
+{
+  "name": "move-tasks",
+  "private": true,
+  "version": "0.0.1-alpha",
+  "description": "Github action to move tasks on Github projects",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "tsc --watch",
+    "build": "tsc && ncc build --source-map --license LICENSE"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hungluu/move-tasks.git"
+  },
+  "keywords": [
+    "github",
+    "actions",
+    "move",
+    "tasks",
+    "projects"
+  ],
+  "author": "Hung Luu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hungluu/move-tasks/issues"
+  },
+  "homepage": "https://github.com/hungluu/move-tasks#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.35",
+    "@vercel/ncc": "^0.27.0",
+    "js-yaml": "^4.0.0",
+    "ts-standard": "^10.0.0",
+    "typescript": "^4.2.3"
+  }
+}

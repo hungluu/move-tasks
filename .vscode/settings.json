@@ -1,0 +1,9 @@
+{
+    "files.trimTrailingWhitespace": true,
+    "javascript.validate.enable": false,
+    "standard.usePackageJson": true,
+    "standard.autoFixOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": false
+    }
+  }

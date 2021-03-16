@@ -25,5 +25,5 @@ jobs:
     # Runs a single command using the runners shell
       - uses: ./
         with:
-          ACTION_TOKEN: ${{ inputs.ACTION_TOKEN }}
-          PROJECT_ID: ${{ inputs.PROJECT_ID }}
+          ACTION_TOKEN: ${{ github.event.inputs.ACTION_TOKEN }}
+          PROJECT_ID: ${{ github.event.inputs.PROJECT_ID }}

@@ -6,7 +6,8 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "tsc --watch",
-    "build": "tsc && ncc build --source-map --license LICENSE"
+    "build": "tsc",
+    "package": "ncc build --source-map --license LICENSE"
   },
   "repository": {
     "type": "git",

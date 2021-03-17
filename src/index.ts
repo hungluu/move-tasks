@@ -21,7 +21,17 @@ async function run ({
     /^\d+$/.test(projectSearch) ? parseInt(projectSearch) : projectSearch
   )
 
-  console.log(project)
+  if (repo.id === undefined) {
+    core.warning(`No repo found as '${repository}'`)
+    return
+  }
+
+  if (project.id === undefined) {
+    core.warning(`No project found with provided search '${projectSearch}'`)
+    return
+  }
+
+  console.log(repo.labels)
 }
 
 function getInputs (): IRunOptions {

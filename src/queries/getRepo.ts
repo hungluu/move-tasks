@@ -16,10 +16,9 @@ export default function (
   const [ownerLogin, repoName] = repo.split('/')
 
   return `repositoryOwner(login: "${ownerLogin}") {
-    id
     __typename
     repository(name: "${repoName}") {
-      id
+      databaseId
       name
       ${getPartials<IGetRepoOptions>(options, getRepoPartials)}
     }
@@ -31,7 +30,7 @@ const getRepoPartials = {
     return `labels(first: ${options.labelLimit as number}) {
       edges {
         node {
-          id
+          resourcePath
           name
         }
       }

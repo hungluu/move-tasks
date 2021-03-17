@@ -1,14 +1,13 @@
-import * as core from '@actions/core'
 import pickBy from 'lodash-es/pickBy'
 import lodashZipObject from 'lodash-es/zipObject'
 import lodashMap from 'lodash-es/map'
 
+export { default as flatten } from 'lodash-es/flatten'
 export { default as get } from 'lodash-es/get'
+export { default as filter } from 'lodash-es/filter'
 
 export const map = lodashMap
 export const zipObject = lodashZipObject
-
-declare const NODE_ENV: string
 
 export function query (contents: string): string {
   return `query{${contents}}`

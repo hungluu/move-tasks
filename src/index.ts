@@ -1,4 +1,5 @@
 import * as core from '@actions/core'
+import Instructor from './Instructor'
 import Services from './Services'
 import { get, map } from './utils'
 
@@ -8,6 +9,8 @@ interface IRunOptions {
   token: string
   repository: string
   projectSearch: string
+  from: string
+  to: string
 }
 async function run ({
   token,
@@ -17,21 +20,23 @@ async function run ({
   const services = new Services(token)
 
   const repo = await services.getRepo(repository)
-  const project = await services.getProject('tekuasia', repo.ownerType,
+  const project = await services.getProject(repository, repo.ownerType,
     /^\d+$/.test(projectSearch) ? parseInt(projectSearch) : projectSearch
   )
 
   if (repo.id === undefined) {
-    core.warning(`No repo found as '${repository}'`)
-    return
+    throw Error(`No repo found as '${repository}'`)
   }
 
   if (project.id === undefined) {
-    core.warning(`No project found with provided search '${projectSearch}'`)
-    return
+    throw Error(`No project found with provided search '${projectSearch}'`)
   }
 
-  console.log(repo.labels)
+  const instructor = new Instructor({
+    project
+  })
+
+  console.log(instructor.get('project.columns(name is In progress).cards(contentLabels has test)'))
 }
 
 function getInputs (): IRunOptions {
@@ -39,13 +44,17 @@ function getInputs (): IRunOptions {
     return {
       token: core.getInput('ACTION_TOKEN'),
       projectSearch: core.getInput('PROJECT_SEARCH'),
-      repository: core.getInput('REPOSITORY')
+      repository: core.getInput('REPOSITORY'),
+      from: core.getInput('FROM'),
+      to: core.getInput('TO')
     }
   } else {
     return {
       token: get(process.argv, 2),
-      projectSearch: get(process.argv, 3),
-      repository: get(process.argv, 4)
+      projectSearch: get(process.argv, 3).trim(),
+      repository: get(process.argv, 4),
+      from: 'project.columns(name in ).card(contentLabels has )',
+      to: 'first project.columns(name.is())'
     }
   }
 }

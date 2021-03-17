@@ -1,5 +1,4 @@
 import { getPartials } from '../utils'
-
 export type OwnerType = 'organization' | 'user'
 export type CardType = 'Issue' | 'PullRequest'
 
@@ -25,7 +24,7 @@ const defaultOptions = {
 }
 
 export default function (
-  ownerLogin: string,
+  ownerOrRepo: string,
   options: IGetProjectOptions
 ): string {
   let projectConditions: string = ''
@@ -33,7 +32,7 @@ export default function (
 
   if (options.projectId !== undefined) {
     projectConditions = `project(number: ${options.projectId}) {
-      id
+      databaseId
       name
       ${getPartials<IGetProjectOptions>(options, getProjectPartials, 1)}
     }`
@@ -41,7 +40,7 @@ export default function (
     projectConditions = `projects(search: "${options.projectName}", first: 1) {
       edges {
         node {
-          id
+          databaseId
           name
           ${getPartials<IGetProjectOptions>(options, getProjectPartials, 1)}
         }
@@ -49,9 +48,19 @@ export default function (
     }`
   }
 
-  return `${options.ownerType as string}(login: "${ownerLogin}") {
-    ${projectConditions}
-  }`
+  const [owner, repo] = ownerOrRepo.split('/')
+
+  if (repo !== undefined) {
+    return `${options.ownerType as string}(login: "${owner}") {
+      repository(name: "${repo}") {
+        ${projectConditions}
+      }
+    }`
+  } else {
+    return `${options.ownerType as string}(login: "${owner}") {
+      ${projectConditions}
+    }`
+  }
 }
 
 const getProjectPartials = {
@@ -59,7 +68,7 @@ const getProjectPartials = {
     return `columns(first: ${options.columnLimit as number}) {
       edges {
         node {
-          id
+          databaseId
           name
           ${getPartials<IGetProjectOptions>(options, getProjectPartials, 2)}
         }
@@ -70,13 +79,13 @@ const getProjectPartials = {
     return `cards(first: ${options.cardLimit as number}) {
       edges {
         node {
-          id
+          databaseId
           content {
             ${options.cardTypes === undefined
               ? ''
               : options.cardTypes.map(cardType => `...on ${cardType} {
               __typename
-              id
+              databaseId
               ${getPartials<IGetProjectOptions>(options, getProjectPartials, 3)}
             }`).join('\n')}
           }
@@ -88,7 +97,7 @@ const getProjectPartials = {
     return `labels(first: ${options.cardLabelLimit as number}) {
       edges {
         node {
-          id
+          resourcePath
           name
         }
       }

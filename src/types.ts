@@ -3,24 +3,24 @@ import { get, map, zipObject } from './utils'
 export interface IRepo {
   id: string
   name: string
-  ownerId: string
+  // ownerId: string
   ownerType: string
-  labels: {[key: string]: string} // id: name
+  // labels: {[key: string]: string} // id: name
 }
 export function repo (data: any): IRepo {
   const root = get(data, 'repositoryOwner', {})
   const repository = get(root, 'repository', {})
-  const labels = map(get(repository, 'labels.edges'), 'node')
+  // const labels = map(get(repository, 'labels.edges'), 'node')
 
   return {
-    id: get(repository, 'id'),
+    id: get(repository, 'databaseId'),
     name: get(repository, 'name'),
-    ownerId: get(root, 'id'),
-    ownerType: (get(root, '__typename') as string).toLowerCase(),
-    labels: zipObject(
-      map(labels, 'id'),
-      map(labels, 'name')
-    )
+    // ownerId: get(root, 'databaseId'),
+    ownerType: (get(root, '__typename') as string).toLowerCase()
+    // labels: zipObject(
+    //   map(labels, 'id'),
+    //   map(labels, 'name')
+    // )
   }
 }
 
@@ -42,27 +42,29 @@ export interface IProject {
 }
 export function project (data: any): IProject {
   const root = get(data, 'organization', get(data, 'user', {}))
-  const project = get(root, 'projects.edges.0.node', get(root, 'project', {}))
+  const repo = get(root, 'repository', root)
+  const project = get(repo, 'projects.edges.0.node', get(repo, 'project', {}))
   const columns = map(get(project, 'columns.edges'), 'node')
 
   return {
-    id: get(project, 'id'),
+    id: get(project, 'databaseId'),
     name: get(project, 'name'),
     columns: map(columns, column => {
       const cards = map(get(column, 'cards.edges'), 'node')
 
       return {
-        ...column,
+        id: get(column, 'databaseId'),
+        name: get(column, 'name'),
         cards: map(cards, card => {
           const content = get(card, 'content', {})
           const labels = map(get(content, 'labels.edges'), 'node')
 
           return {
-            id: get(card, 'id'),
-            contentId: get(content, 'id'),
+            id: get(card, 'databaseId'),
+            contentId: get(content, 'databaseId'),
             contentType: get(content, '__typeName'),
             contentLabels: zipObject(
-              map(labels, 'id'),
+              map(labels, 'resourcePath'),
               map(labels, 'name')
             )
           }

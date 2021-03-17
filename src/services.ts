@@ -13,12 +13,10 @@ export default class Services {
   }
 
   async getRepo (ownerRepo: string): Promise<IRepo> {
-    return repo(await this.client.graphql(query(getRepo(ownerRepo, {
-      partials: ['labels']
-    }))))
+    return repo(await this.client.graphql(query(getRepo(ownerRepo))))
   }
 
-  async getProject (ownerLogin: string, ownerType: string, search: string | number): Promise<IProject> {
+  async getProject (ownerOrRepo: string, ownerType: string, search: string | number): Promise<IProject> {
     const options: any = {
       ownerType: (ownerType as OwnerType),
       partials: [
@@ -34,6 +32,6 @@ export default class Services {
       options.projectId = search
     }
 
-    return project(await this.client.graphql(query(getProject(ownerLogin, options))))
+    return project(await this.client.graphql(query(getProject(ownerOrRepo, options))))
   }
 }

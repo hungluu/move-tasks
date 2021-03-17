@@ -89,6 +89,7 @@ const getProjectPartials = {
       edges {
         node {
           id
+          name
         }
       }
     }`

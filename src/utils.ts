@@ -1,7 +1,14 @@
+import * as core from '@actions/core'
 import pickBy from 'lodash-es/pickBy'
-export { default as map } from 'lodash-es/map'
+import lodashZipObject from 'lodash-es/zipObject'
+import lodashMap from 'lodash-es/map'
+
 export { default as get } from 'lodash-es/get'
-export { default as zipObject } from 'lodash-es/zipObject'
+
+export const map = lodashMap
+export const zipObject = lodashZipObject
+
+declare const NODE_ENV: string
 
 export function query (contents: string): string {
   return `query{${contents}}`
@@ -32,4 +39,15 @@ export function getPartials<T extends IWithPartials> (
       .map(partialFn => partialFn(options))
       .join('\n')
   }
+}
+
+export function getInputs<T> (inputMap: {[key: string]: string}, defaultValues: {[key: string]: string} = {}): T {
+  return lodashZipObject(
+    Object.keys(inputMap),
+    map(inputMap, (inputName, outputKey) =>
+      // (NODE_ENV !== 'development' && core.getInput(name)) ||
+      defaultValues[outputKey] || // eslint-disable-line @typescript-eslint/strict-boolean-expressions
+      ''
+    )
+  ) as any
 }

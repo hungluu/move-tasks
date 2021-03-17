@@ -1,8 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-const glob = require('fast-glob')
-const { zipObject } = require('lodash')
-const nodeExternals = require('webpack-node-externals')
+// const nodeExternals = require('webpack-node-externals')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 // const pkg = require('./package.json')
@@ -36,9 +34,9 @@ const getConfig = async () => ({
     ]
   },
   externals: [
-    nodeExternals({
-      allowlist: /^(?!@(?:actions|octokit)\/).+/
-    })
+    // nodeExternals({
+    //   allowlist: /^(?!@(?:actions|octokit)\/).+/
+    // })
   ],
   plugins: [
     new CleanWebpackPlugin(),

@@ -1,6 +1,8 @@
 import * as core from '@actions/core'
 import Services from './Services'
-import { get, getInputs, map } from './utils'
+import { get, map } from './utils'
+
+declare const NODE_ENV: string
 
 interface IRunOptions {
   token: string
@@ -19,15 +21,23 @@ async function run ({
     /^\d+$/.test(projectSearch) ? parseInt(projectSearch) : projectSearch
   )
 
-  console.log(map(project.columns, 'cards').map(cards => map(cards, 'contentLabels')))
+  console.log(project)
 }
 
-run(getInputs<IRunOptions>({
-  token: 'ACTION_TOKEN',
-  projectSearch: 'PROJECT_SEARCH',
-  repository: 'REPOSITORY'
-}, {
-  token: get(process.argv, 2),
-  projectSearch: get(process.argv, 3),
-  repository: 'tekuasia/blocks'
-})).catch((err: Error) => core.setFailed(err.stack ?? err.message))
+function getInputs (): IRunOptions {
+  if (NODE_ENV !== 'development') {
+    return {
+      token: get(process.argv, 2),
+      projectSearch: get(process.argv, 3),
+      repository: get(process.argv, 4)
+    }
+  } else {
+    return {
+      token: core.getInput('ACTION_TOKEN'),
+      projectSearch: core.getInput('PROJECT_SEARCH'),
+      repository: core.getInput('REPOSITORY')
+    }
+  }
+}
+
+run(getInputs()).catch((err: Error) => core.setFailed(err.stack ?? err.message))

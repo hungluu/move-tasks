@@ -10,6 +10,8 @@ on:
     inputs:
       PROJECT_SEARCH:
         required: true
+      REPOSITORY:
+        required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -25,3 +27,4 @@ jobs:
         with:
           ACTION_TOKEN: ${{ secrets.TEST_ACTION_TOKEN }}
           PROJECT_SEARCH: ${{ github.event.inputs.PROJECT_SEARCH }}
+          REPOSITORY: ${{ github.event.inputs.PROJECT_SEARCH }}

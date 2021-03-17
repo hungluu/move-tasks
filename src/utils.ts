@@ -40,14 +40,3 @@ export function getPartials<T extends IWithPartials> (
       .join('\n')
   }
 }
-
-export function getInputs<T> (inputMap: {[key: string]: string}, defaultValues: {[key: string]: string} = {}): T {
-  return lodashZipObject(
-    Object.keys(inputMap),
-    map(inputMap, (inputName, outputKey) =>
-      // (NODE_ENV !== 'development' && core.getInput(name)) ||
-      defaultValues[outputKey] || // eslint-disable-line @typescript-eslint/strict-boolean-expressions
-      ''
-    )
-  ) as any
-}

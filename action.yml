@@ -5,9 +5,12 @@ inputs:
   ACTION_TOKEN:
     required: true
     description: 'Github token with required permissions on Projects & Issues'
-  PROJECT_ID:
+  PROJECT_SEARCH:
     required: true
-    description: 'Id of project to move tasks into'
+    description: 'number id or name of project to move tasks into'
+  REPOSITORY:
+    required: true
+    description: 'owner/repo-name'
 runs:
   using: 'node12'
   main: 'action/index.js'

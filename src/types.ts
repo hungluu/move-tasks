@@ -1,4 +1,4 @@
-import { get, map, zipObject } from 'lodash'
+import { get, map, zipObject } from './utils'
 
 export interface IRepo {
   id: string

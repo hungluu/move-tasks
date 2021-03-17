@@ -1,4 +1,7 @@
-import { pickBy } from 'lodash-es'
+import pickBy from 'lodash-es/pickBy'
+export { default as map } from 'lodash-es/map'
+export { default as get } from 'lodash-es/get'
+export { default as zipObject } from 'lodash-es/zipObject'
 
 export function query (contents: string): string {
   return `query{${contents}}`

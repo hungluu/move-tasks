@@ -25,17 +25,17 @@ async function run ({
 }
 
 function getInputs (): IRunOptions {
-  if (NODE_ENV !== 'development') {
-    return {
-      token: get(process.argv, 2),
-      projectSearch: get(process.argv, 3),
-      repository: get(process.argv, 4)
-    }
-  } else {
+  if (NODE_ENV === 'production') {
     return {
       token: core.getInput('ACTION_TOKEN'),
       projectSearch: core.getInput('PROJECT_SEARCH'),
       repository: core.getInput('REPOSITORY')
+    }
+  } else {
+    return {
+      token: get(process.argv, 2),
+      projectSearch: get(process.argv, 3),
+      repository: get(process.argv, 4)
     }
   }
 }

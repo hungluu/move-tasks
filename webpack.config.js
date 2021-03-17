@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 // const pkg = require('./package.json')
 const { resolve } = require('path')
 const {
-  NODE_ENV = 'production'
+  NODE_ENV = 'development'
 } = process.env
 
 const getConfig = async () => ({

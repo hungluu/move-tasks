@@ -62,7 +62,7 @@ export function project (data: any): IProject {
           return {
             id: get(card, 'databaseId'),
             contentId: get(content, 'databaseId'),
-            contentType: get(content, '__typeName'),
+            contentType: get(content, '__typename'),
             contentLabels: zipObject(
               map(labels, 'resourcePath'),
               map(labels, 'name')

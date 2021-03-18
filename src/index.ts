@@ -1,7 +1,8 @@
 import * as core from '@actions/core'
+import * as github from '@actions/github'
 import Instructor from './Instructor'
 import Services from './Services'
-import { get, map } from './utils'
+import { get } from './utils'
 
 declare const NODE_ENV: string
 
@@ -9,13 +10,15 @@ interface IRunOptions {
   token: string
   repository: string
   projectSearch: string
-  from: string
-  to: string
+  fromCards: string
+  toColumn: string
 }
 async function run ({
   token,
   repository,
-  projectSearch
+  projectSearch,
+  fromCards,
+  toColumn
 }: IRunOptions): Promise<void> {
   const services = new Services(token)
 
@@ -33,10 +36,12 @@ async function run ({
   }
 
   const instructor = new Instructor({
-    project
+    project,
+    github
   })
 
-  console.log(instructor.get('project.columns(name is In progress).cards(contentLabels has test)'))
+  console.log(instructor.get(fromCards))
+  console.log(instructor.get(toColumn))
 }
 
 function getInputs (): IRunOptions {
@@ -45,16 +50,16 @@ function getInputs (): IRunOptions {
       token: core.getInput('ACTION_TOKEN'),
       projectSearch: core.getInput('PROJECT_SEARCH'),
       repository: core.getInput('REPOSITORY'),
-      from: core.getInput('FROM'),
-      to: core.getInput('TO')
+      fromCards: core.getInput('FROM_CARDS'),
+      toColumn: core.getInput('TO_COLUMN')
     }
   } else {
     return {
       token: get(process.argv, 2),
       projectSearch: get(process.argv, 3).trim(),
       repository: get(process.argv, 4),
-      from: 'project.columns(name in ).card(contentLabels has )',
-      to: 'first project.columns(name.is())'
+      fromCards: '$project > columns(name is In progress) > cards',
+      toColumn: '$project > columns(name is Done)'
     }
   }
 }

@@ -2,15 +2,21 @@ name: 'move-tasks'
 description: 'Github action to move tasks on Github projects'
 author: 'Hung Luu <hungluu2106@gmail.com>'
 inputs:
-  ACTION_TOKEN:
+  actionToken:
     required: true
     description: 'Github token with required permissions on Projects & Issues'
-  PROJECT_SEARCH:
+  project:
     required: true
     description: 'number id or name of project to move tasks into'
-  REPOSITORY:
+  repository:
     required: true
     description: 'owner/repo-name'
+  fromCards:
+    required: true
+    description: 'instruction to find cards to move'
+  toColumn:
+    required: true
+    description: 'instruction to find column for moving cards into'
 runs:
   using: 'node12'
   main: 'action/index.js'

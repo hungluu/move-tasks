@@ -26,6 +26,7 @@ export function repo (data: any): IRepo {
 
 export interface IProjectCard {
   id: string
+  contentTitle: string
   contentType: string
   contentId: string
   contentLabels: {[key: string]: string}
@@ -62,6 +63,7 @@ export function project (data: any): IProject {
           return {
             id: get(card, 'databaseId'),
             contentId: get(content, 'databaseId'),
+            contentTitle: get(content, 'title'),
             contentType: get(content, '__typename'),
             contentLabels: zipObject(
               map(labels, 'resourcePath'),

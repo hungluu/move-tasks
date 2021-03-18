@@ -85,6 +85,7 @@ const getProjectPartials = {
               ? ''
               : options.cardTypes.map(cardType => `...on ${cardType} {
               __typename
+              title
               databaseId
               ${getPartials<IGetProjectOptions>(options, getProjectPartials, 3)}
             }`).join('\n')}

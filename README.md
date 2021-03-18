@@ -1,2 +1,5 @@
-# move-issues-to-column
-Action to move issues into a project column with some conditions
+# Move-Tasks v1
+Action to move issues / PRs between project columns with some conditions
+
+## Features
+- Super-fast

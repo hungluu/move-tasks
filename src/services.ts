@@ -34,4 +34,12 @@ export default class Services {
 
     return project(await this.client.graphql(query(getProject(ownerOrRepo, options))))
   }
+
+  async addCardToColumn (columnId: string, cardId: string): Promise<any> {
+    return await this.client.projects.moveCard({
+      card_id: parseInt(cardId),
+      column_id: parseInt(columnId),
+      position: 'top'
+    })
+  }
 }

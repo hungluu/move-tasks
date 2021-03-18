@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
-      PROJECT_SEARCH:
+      PROJECT:
         required: true
       REPOSITORY:
         required: true
@@ -25,6 +25,11 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          ACTION_TOKEN: ${{ secrets.TEST_ACTION_TOKEN }}
-          PROJECT_SEARCH: ${{ github.event.inputs.PROJECT_SEARCH }}
-          REPOSITORY: ${{ github.event.inputs.PROJECT_SEARCH }}
+          actionToken: ${{ secrets.TEST_ACTION_TOKEN }}
+          project: ${{ github.event.inputs.PROJECT }}
+          repository: ${{ github.event.inputs.PROJECT_SEARCH }}
+          fromCards: >
+            $project
+              .columns(name is In progress)
+              .cards
+          toColumn: $project.columns(name hasText Done)

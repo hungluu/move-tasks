@@ -52,7 +52,7 @@ async function run ({
 
   const instructor = new Instructor({
     project: proj,
-    github
+    context: github.context ?? {}
   })
 
   const columns = instructor.get<IProjectColumn>(toColumn)
@@ -80,10 +80,12 @@ async function run ({
     }
   }))
 
-  core.info([
-    'Moved cards: ',
-    ...map(movedCards, (title, id) => `  - #${id}: ${title ?? '<note>'}`)
-  ].join('\n'))
+  if (Object.keys(movedCards).length > 0) {
+    core.info([
+      'Moved cards: ',
+      ...map(movedCards, (title, id) => `  - #${id}: ${title ?? '<note>'}`)
+    ].join('\n'))
+  }
 
   if (Object.keys(cardErrors).length > 0) {
     core.warning([

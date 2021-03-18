@@ -26,9 +26,15 @@ export function repo (data: any): IRepo {
 
 export interface IProjectCard {
   id: string
+  contentId: string
   contentTitle: string
   contentType: string
-  contentId: string
+  contentCreatedAt: string
+  contentAuthor: string
+  contentState: string
+  // { assigneeId: assigneeName }
+  contentAssignees: {[key: string]: string}
+  // { labelId: labelName }
   contentLabels: {[key: string]: string}
 }
 export interface IProjectColumn {
@@ -59,12 +65,20 @@ export function project (data: any): IProject {
         cards: map(cards, card => {
           const content = get(card, 'content', {})
           const labels = map(get(content, 'labels.edges'), 'node')
+          const assignees = map(get(content, 'assignees.edges'), 'node')
 
           return {
             id: get(card, 'databaseId'),
             contentId: get(content, 'databaseId'),
             contentTitle: get(content, 'title'),
             contentType: get(content, '__typename'),
+            contentCreatedAt: get(content, 'createdAt'),
+            contentAuthor: get(content, 'author.login'),
+            contentState: (get(content, 'state') as string + '').toLowerCase(),
+            contentAssignees: zipObject(
+              map(assignees, 'databaseId'),
+              map(assignees, 'login')
+            ),
             contentLabels: zipObject(
               map(labels, 'resourcePath'),
               map(labels, 'name')

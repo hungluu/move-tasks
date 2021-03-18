@@ -160,9 +160,15 @@ Format break-down:
 ```js
 export interface IProjectCard {
   id: string
+  contentId: string
   contentTitle: string
   contentType: string
-  contentId: string
+  contentCreatedAt: string
+  contentAuthor: string
+  contentState: string
+  // { assigneeId: assigneeName }
+  contentAssignees: {[key: string]: string}
+  // { labelId: labelName }
   contentLabels: {[key: string]: string}
 }
 ```

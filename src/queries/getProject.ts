@@ -87,6 +87,19 @@ const getProjectPartials = {
               __typename
               title
               databaseId
+              createdAt
+              author {
+                login
+              }
+              state
+              assignees(first: 10) {
+                edges {
+                  node {
+                    databaseId
+                    login
+                  }
+                }
+              }
               ${getPartials<IGetProjectOptions>(options, getProjectPartials, 3)}
             }`).join('\n')}
           }

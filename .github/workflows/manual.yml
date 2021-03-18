@@ -27,7 +27,7 @@ jobs:
         with:
           actionToken: ${{ secrets.TEST_ACTION_TOKEN }}
           project: ${{ github.event.inputs.PROJECT }}
-          repository: ${{ github.event.inputs.PROJECT_SEARCH }}
+          repository: ${{ github.event.inputs.REPOSITORY }}
           fromCards: >
             $project
               > columns(name is In progress)

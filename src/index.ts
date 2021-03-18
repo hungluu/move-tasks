@@ -35,22 +35,12 @@ async function run ({
     ownerOrOwnRepo = projectSearchParts.join('/')
   }
 
-  console.log({
-    token,
-    repository,
-    project,
-    fromCards,
-    toColumn
-  })
-
   const repo = await services.getRepo(repository)
-  console.log(repo)
   const proj = await services.getProject(
     ownerOrOwnRepo,
     repo.ownerType,
     /^\d+$/.test(projectSearch) ? parseInt(projectSearch) : projectSearch
   )
-  console.log(proj)
 
   if (repo.id === undefined) {
     throw Error(`No repo found as '${repository}'`)

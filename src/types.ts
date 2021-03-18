@@ -16,7 +16,7 @@ export function repo (data: any): IRepo {
     id: get(repository, 'databaseId'),
     name: get(repository, 'name'),
     // ownerId: get(root, 'databaseId'),
-    ownerType: (get(root, '__typename') as string).toLowerCase()
+    ownerType: (get(root, '__typename') as string + '').toLowerCase()
     // labels: zipObject(
     //   map(labels, 'id'),
     //   map(labels, 'name')

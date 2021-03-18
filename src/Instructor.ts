@@ -33,7 +33,7 @@ export const InstructorFilters: { [key: string]: (...args: any[]) => boolean } =
   // case insensitive
   hasText (input: any, needle: string) {
     if (kindOf(input) === 'string') {
-      return (input as string).toLowerCase().includes(needle)
+      return (input as string + '').toLowerCase().includes(needle)
     } else {
       return false
     }

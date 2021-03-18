@@ -20,5 +20,6 @@ inputs:
 runs:
   using: 'node12'
   main: 'action/index.js'
-icon: 'truck'
-color: 'yellow'
+branding:
+  icon: 'truck'  
+  color: 'green'

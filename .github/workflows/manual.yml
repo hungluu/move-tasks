@@ -1,6 +1,6 @@
 # This is a basic workflow that is manually triggered
 
-name: Manual workflow
+name: Test manual run
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
@@ -30,6 +30,6 @@ jobs:
           repository: ${{ github.event.inputs.PROJECT_SEARCH }}
           fromCards: >
             $project
-              .columns(name is In progress)
-              .cards
-          toColumn: $project.columns(name hasText Done)
+              > columns(name is In progress)
+              > cards
+          toColumn: $project > columns(name hasText Done)

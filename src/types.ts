@@ -1,7 +1,7 @@
 import { get, map, zipObject } from './utils'
 
 export interface IRepo {
-  id: string
+  id: number
   name: string
   // ownerId: string
   ownerType: string
@@ -25,8 +25,9 @@ export function repo (data: any): IRepo {
 }
 
 export interface IProjectCard {
-  id: string
-  contentId: string
+  id: number
+  contentId: number
+  contentNumber: number // issue or PR number, displayed on UI, for example #14
   contentTitle: string
   contentType: string
   contentCreatedAt: string
@@ -38,12 +39,13 @@ export interface IProjectCard {
   contentLabels: {[key: string]: string}
 }
 export interface IProjectColumn {
-  id: string
+  id: number
   name: string
   cards: IProjectCard[]
 }
 export interface IProject {
-  id: string
+  id: number
+  number: number
   name: string
   columns: IProjectColumn[]
 }
@@ -56,6 +58,7 @@ export function project (data: any): IProject {
   return {
     id: get(project, 'databaseId'),
     name: get(project, 'name'),
+    number: get(project, 'number'),
     columns: map(columns, column => {
       const cards = map(get(column, 'cards.edges'), 'node')
 
@@ -70,6 +73,7 @@ export function project (data: any): IProject {
           return {
             id: get(card, 'databaseId'),
             contentId: get(content, 'databaseId'),
+            contentNumber: get(content, 'number'),
             contentTitle: get(content, 'title'),
             contentType: get(content, '__typename'),
             contentCreatedAt: get(content, 'createdAt'),

@@ -72,7 +72,7 @@ async function run ({
   const cardErrors: {[key: string]: string} = {}
   await Promise.all(movingCards.map(async card => {
     try {
-      await services.addCardToColumn(destColumn.id, card.id)
+      await services.addCardToColumn(destColumn.id.toString(), card.id.toString())
 
       movedCards[card.id] = card.contentTitle
     } catch (err) {

@@ -110,11 +110,11 @@ toColumn: >
     > columns(name is Done)
 ```
 
-**Example 2** Column with issue id from [event context](https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context):
+**Example 2** Column with issue number (the number displayed on Issue, for example `#1`) from [event context](https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context):
 ```yaml
 toColumn: >
   $project
-    > columns(contentId is ${{ github.context.issue.id }})
+    > columns(contentNumber is ${{ github.context.issue.number }})
 ```
 
 Instructor Query
@@ -159,8 +159,9 @@ Format break-down:
 #### Card definition:
 ```js
 export interface IProjectCard {
-  id: string
-  contentId: string
+  id: number
+  contentId: number
+  contentNumber: number // issue or PR number, displayed on UI, for example #14
   contentTitle: string
   contentType: string
   contentCreatedAt: string
@@ -176,7 +177,7 @@ export interface IProjectCard {
 #### Column definition:
 ```js
 export interface IProjectColumn {
-  id: string
+  id: number
   name: string
   cards: IProjectCard[]
 }

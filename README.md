@@ -27,7 +27,7 @@ Here is an example setup using this action, which required params. Details on pa
 ```yaml
 ...
 steps:
-  - uses: hungluu/move-tasks@v1
+  - uses: hungluu/move-tasks@v2
     with:
       actionToken: <action-token>
       project: <project>

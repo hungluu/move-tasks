@@ -1,10 +1,10 @@
-Move-Tasks v1
+Move-Tasks v2
 =====
 Action to move issues / PRs between project columns with some conditions
 
 **Features:**
-- 🚀 Super-fast with Github graphql and restful APIs
-- ✨ Flexible usecases with our [Instructor Query](#instructor-query)
+- 🚀 Super-fast with Github Graphql and restful APIs
+- ✨ Flexible use cases with our [Instructor Query](#instructor-query)
 - 🏭 A part of [TekuAsia](https://github.com/tekuasia) standard process (guideline coming soon)
 
 **Table of contents:**
@@ -27,7 +27,7 @@ Here is an example setup using this action, which required params. Details on pa
 ```yaml
 ...
 steps:
-  - uses: actions/move-tasks@v1
+  - uses: hungluu/move-tasks@v1
     with:
       actionToken: <action-token>
       project: <project>
@@ -110,11 +110,11 @@ toColumn: >
     > columns(name is Done)
 ```
 
-**Example 2** Column with id `1235553`:
+**Example 2** Column with issue number (the number displayed on Issue, for example `#1`) from [event context](https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context):
 ```yaml
 toColumn: >
   $project
-    > columns(name is 1235553)
+    > columns(contentNumber is ${{ github.context.issue.number }})
 ```
 
 Instructor Query
@@ -159,8 +159,9 @@ Format break-down:
 #### Card definition:
 ```js
 export interface IProjectCard {
-  id: string
-  contentId: string
+  id: number
+  contentId: number
+  contentNumber: number // issue or PR number, displayed on UI, for example #14
   contentTitle: string
   contentType: string
   contentCreatedAt: string
@@ -176,7 +177,7 @@ export interface IProjectCard {
 #### Column definition:
 ```js
 export interface IProjectColumn {
-  id: string
+  id: number
   name: string
   cards: IProjectCard[]
 }
@@ -184,7 +185,17 @@ export interface IProjectColumn {
 
 Contribution
 -----
-Contributions are welcomed. Feel free to clone this project, make changes that your feel necessary and pull request anytime you want.
+All contributions are welcomed. Feel free to clone this project, make changes that your feel necessary and pull request anytime you want.
+
+Install dependencies
+```
+yarn install
+```
+
+Run development build
+```
+yarn start
+```
 
 If you have any other suggestions, you can even open new issues with `enhancement` label.
 

@@ -72,7 +72,7 @@ async function run ({
   const cardErrors: {[key: string]: string} = {}
   await Promise.all(movingCards.map(async card => {
     try {
-      await services.addCardToColumn(destColumn.id, card.id)
+      await services.addCardToColumn(destColumn.id.toString(), card.id.toString())
 
       movedCards[card.id] = card.contentTitle
     } catch (err) {
@@ -109,7 +109,7 @@ function getInputs (): IRunOptions {
       token: get(process.argv, 2),
       project: get(process.argv, 3).trim(),
       repository: get(process.argv, 4),
-      fromCards: '$project > columns(name is In progress) > cards',
+      fromCards: '$project > columns(name is In progress) > cards(contentId oneOf 833156448)',
       toColumn: '$project > columns(name is Done)'
     }
   }

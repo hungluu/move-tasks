@@ -10,15 +10,21 @@ const FILTER_PARAM_SEPARATOR = /, ?/
 const DATASOURCE_REGEX = /^\$/
 const PATTERN_REGEX = /^\/(.+)\/([^/]+)$/
 
+const safeCompareTypes = [
+  'number',
+  'boolean'
+]
+const isSafe = (input: string): boolean => safeCompareTypes.includes(kindOf(input))
+const sanitize = (input: any): any => isSafe(input) ? input.toString() : input
 export const InstructorFilters: { [key: string]: (...args: any[]) => boolean } = {
   oneOf (input: any, ...params: string[]) {
-    return params.includes(input)
+    return params.includes(sanitize(input))
   },
   in (input: any, list: any) {
-    return InstructorFilters.has(list, input)
+    return InstructorFilters.has(list, sanitize(input))
   },
   is (input: any, comparedValue: any) {
-    return input === comparedValue
+    return sanitize(input) === comparedValue
   },
   has (input: any, needle: any) {
     switch (kindOf(input)) {

@@ -32,6 +32,7 @@ export default function (
 
   if (options.projectId !== undefined) {
     projectConditions = `project(number: ${options.projectId}) {
+      number
       databaseId
       name
       ${getPartials<IGetProjectOptions>(options, getProjectPartials, 1)}
@@ -40,6 +41,7 @@ export default function (
     projectConditions = `projects(search: "${options.projectName}", first: 1) {
       edges {
         node {
+          number
           databaseId
           name
           ${getPartials<IGetProjectOptions>(options, getProjectPartials, 1)}
@@ -85,6 +87,7 @@ const getProjectPartials = {
               ? ''
               : options.cardTypes.map(cardType => `...on ${cardType} {
               __typename
+              number
               title
               databaseId
               createdAt

@@ -1,4 +1,4 @@
-Move-Tasks v2
+Move-Tasks v3
 =====
 Action to move issues / PRs between project columns with some conditions
 
@@ -27,7 +27,7 @@ Here is an example setup using this action, which required params. Details on pa
 ```yaml
 ...
 steps:
-  - uses: hungluu/move-tasks@v2
+  - uses: hungluu/move-tasks@v3
     with:
       actionToken: <action-token>
       project: <project>

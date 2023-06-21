@@ -5,8 +5,6 @@ import Services from '../src/services'
 import type { IProjectCard, IProjectColumn } from '../src/types'
 import { get, map } from '../src/utils'
 
-declare const NODE_ENV: string
-
 interface IRunOptions {
   token: string
   repository: string
@@ -97,7 +95,7 @@ async function run ({
 }
 
 function getInputs (): IRunOptions {
-  if (NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production') {
     return {
       token: core.getInput('actionToken'),
       project: core.getInput('project'),

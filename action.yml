@@ -18,7 +18,7 @@ inputs:
     required: true
     description: 'instruction to find column for moving cards into'
 runs:
-  using: 'node18'
+  using: 'node16'
   main: 'action/index.js'
 branding:
   icon: 'truck'

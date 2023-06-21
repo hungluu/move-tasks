@@ -34,9 +34,9 @@ export interface IProjectCard {
   contentAuthor: string
   contentState: string
   // { assigneeId: assigneeName }
-  contentAssignees: {[key: string]: string}
+  contentAssignees: Record<string, string>
   // { labelId: labelName }
-  contentLabels: {[key: string]: string}
+  contentLabels: Record<string, string>
 }
 export interface IProjectColumn {
   id: number

@@ -2,7 +2,7 @@ import * as github from '@actions/github'
 import getProject from './queries/getProject'
 import type { OwnerType } from './queries/getProject'
 import getRepo from './queries/getRepo'
-import { IProject, IRepo, project, repo } from './types'
+import { type IProject, type IRepo, project, repo } from './types'
 import { query } from './utils'
 
 export default class Services {
@@ -36,7 +36,7 @@ export default class Services {
   }
 
   async addCardToColumn (columnId: string, cardId: string): Promise<any> {
-    return await this.client.projects.moveCard({
+    return await this.client.rest.projects.moveCard({
       card_id: parseInt(cardId),
       column_id: parseInt(columnId),
       position: 'top'

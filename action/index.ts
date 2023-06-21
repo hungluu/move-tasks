@@ -1,9 +1,9 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import Instructor from './Instructor'
-import Services from './Services'
-import type { IProjectCard, IProjectColumn } from './types'
-import { get, map } from './utils'
+import Instructor from '../src/Instructor'
+import Services from '../src/services'
+import type { IProjectCard, IProjectColumn } from '../src/types'
+import { get, map } from '../src/utils'
 
 declare const NODE_ENV: string
 
@@ -68,14 +68,15 @@ async function run ({
     core.warning(`No cards found with '${fromCards}'`)
   }
 
-  const movedCards: {[key: string]: string} = {}
-  const cardErrors: {[key: string]: string} = {}
+  const movedCards: Record<string, string> = {}
+  const cardErrors: Record<string, string> = {}
+
   await Promise.all(movingCards.map(async card => {
     try {
       await services.addCardToColumn(destColumn.id.toString(), card.id.toString())
 
       movedCards[card.id] = card.contentTitle
-    } catch (err) {
+    } catch (err: any) {
       cardErrors[card.id] = err.message
     }
   }))
@@ -115,4 +116,4 @@ function getInputs (): IRunOptions {
   }
 }
 
-run(getInputs()).catch((err: Error) => core.setFailed(err.stack ?? err.message))
+run(getInputs()).catch((err: Error) => { core.setFailed(err.stack ?? err.message) })

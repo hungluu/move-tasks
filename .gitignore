@@ -103,7 +103,23 @@ dist
 # TernJS port file
 .tern-port
 
-# Ignore built ts files
-__tests__/runner/*
-lib/**/*
+# Yarn
+# .yarnrc
+# .yarnrc.*
+.yarn/*
+!.yarn/releases
+!.yarn/patches
+# .yarn/plugins
+!.yarn/sdks
+# .yarn/versions
+# Documentation here: https://yarnpkg.com/features/zero-installs
+# .yarn/cache
+.pnp.*
+
+# Custom
+**/*.cache
+**/.env
+**/index.js
+
 tmp/
+**/tmp

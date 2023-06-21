@@ -16,7 +16,8 @@ const safeCompareTypes = [
 ]
 const isSafe = (input: string): boolean => safeCompareTypes.includes(kindOf(input))
 const sanitize = (input: any): any => isSafe(input) ? input.toString() : input
-export const InstructorFilters: { [key: string]: (...args: any[]) => boolean } = {
+
+export const InstructorFilters: Record<string, (...args: any[]) => boolean> = {
   oneOf (input: any, ...params: string[]) {
     return params.includes(sanitize(input))
   },
@@ -53,10 +54,11 @@ export const InstructorFilters: { [key: string]: (...args: any[]) => boolean } =
 }
 
 const availableFilters = Object.keys(InstructorFilters)
+
 export default class Instructor {
   constructor (private readonly data: any) {}
 
-  get<T extends any> (instruction: string): T[] {
+  get<T> (instruction: string): T[] {
     const [source, ...layers] = instruction.trim().split(INSTRUCTION_SEPARATOR)
     const dataSource: any[] = this.getLayer(this.data, source)
 

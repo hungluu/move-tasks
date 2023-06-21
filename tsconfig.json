@@ -1,12 +1,42 @@
 {
+  "include": [
+    ".eslintrc.js",
+    "src/**/*.ts",
+    "action/**/*.ts"
+  ],
+  "exclude": [
+    ".yarn",
+    "node_modules",
+    "**/*.js"
+  ],
   "compilerOptions": {
-    "target": "es6",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019' or 'ESNEXT'. */
-    "module": "commonjs",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
-    "outDir": "./lib",                        /* Redirect output structure to the directory. */
-    "rootDir": "./src",                       /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
-    "strict": true,                           /* Enable all strict type-checking options. */
-    "noImplicitAny": true,                    /* Raise error on expressions and declarations with an implied 'any' type. */
-    "esModuleInterop": true                   /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
-  },
-  "exclude": ["node_modules", "**/*.test.ts"]
+    // "declaration": true,
+    "module": "commonjs",
+    "target": "es6",
+    // for react only
+    // "jsx": "react",
+    "lib": [
+      "dom",
+      "esnext",
+      "WebWorker"
+    ],
+    "removeComments": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    // "types": [
+    // "node",
+    // For react only (next for react v18)
+    // "react/next",
+    // "react-dom/next",
+    // ],
+    "strict": true,
+    // "noEmit": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": false,
+    // "allowJs": true,
+    /* Advanced Options */
+    "skipLibCheck": true, /* Skip type checking of declaration files. */
+    "forceConsistentCasingInFileNames": true, /* Disallow inconsistently-cased references to the same file. */
   }
+}

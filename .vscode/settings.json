@@ -1,9 +1,17 @@
 {
-    "files.trimTrailingWhitespace": true,
-    "javascript.validate.enable": false,
-    "standard.usePackageJson": true,
-    "standard.autoFixOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": false
-    }
-  }
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true,
+    "**/tmp": true
+  },
+  "files.insertFinalNewline": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.format.enable": true,
+  "editor.formatOnSave": true,
+  // remove 3 lines if not using yarn sdks
+  "eslint.nodePath": ".yarn/sdks",
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+}

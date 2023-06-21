@@ -5,9 +5,9 @@
   "description": "Github action to move tasks on Github projects",
   "main": "action/index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack",
-    "start": "webpack",
-    "lint": "ts-standard src/**/*.ts"
+    "build": "builder build --node-env production",
+    "start": "builder build",
+    "lint": "eslint action/**/*.ts src/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -26,23 +26,34 @@
     "url": "https://github.com/hungluu/move-tasks/issues"
   },
   "homepage": "https://github.com/hungluu/move-tasks#readme",
+  "packageManager": "yarn@3.6.0",
+  "devDependencies": {
+    "@abux/builder": "0.2.5",
+    "@types/kind-of": "^6.0.0",
+    "@types/lodash-es": "^4.17.7",
+    "@types/node": "^20.3.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "clean-webpack-plugin": "^4.0.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.39.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-config-standard-with-typescript": "^34.0.1",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "js-yaml": "^4.1.0",
+    "ts-loader": "^9.4.3",
+    "ts-standard": "^12.0.2",
+    "typescript": "~5.0",
+    "webpack": "^5.80.0",
+    "webpack-cli": "^5.1.4"
+  },
   "dependencies": {
-    "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0",
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
     "kind-of": "^6.0.3",
     "lodash-es": "^4.17.21"
-  },
-  "devDependencies": {
-    "@types/kind-of": "^6.0.0",
-    "@types/lodash-es": "^4.17.4",
-    "@types/node": "^14.14.35",
-    "clean-webpack-plugin": "^3.0.0",
-    "cross-env": "^7.0.3",
-    "js-yaml": "^4.0.0",
-    "ts-loader": "^8.0.18",
-    "ts-standard": "^10.0.0",
-    "typescript": "^4.2.3",
-    "webpack": "^5.26.2",
-    "webpack-cli": "^4.5.0"
   }
 }

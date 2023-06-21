@@ -15,14 +15,12 @@ export function query (contents: string): string {
 
 interface IWithPartials { partials?: string[] }
 export type QueryPartial<T extends IWithPartials> = (options: T) => string
-export interface INamedQueryPartials<T extends IWithPartials> {
-  [key: string]: QueryPartial<T>
-}
+export type INamedQueryPartials<T extends IWithPartials> = Record<string, QueryPartial<T>>
 export const PARTIAL_SEPARATOR = '.'
 export function getPartials<T extends IWithPartials> (
   options: T,
   namedPartials: INamedQueryPartials<T>,
-  level: number = 0
+  level = 0
 ): string {
   if (options.partials === undefined) {
     return ''

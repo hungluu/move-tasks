@@ -27,7 +27,8 @@ export default function (
   ownerOrRepo: string,
   options: IGetProjectOptions
 ): string {
-  let projectConditions: string = ''
+  let projectConditions = ''
+
   options = Object.assign({}, defaultOptions, options)
 
   if (options.projectId !== undefined) {

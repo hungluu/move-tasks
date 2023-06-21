@@ -1,5 +1,7 @@
 {
-    "recommendations": [
-        "chenxsan.vscode-standardjs"
-    ]
+  "recommendations": [
+    "arcanis.vscode-zipfs",
+    "dbaeumer.vscode-eslint",
+    "EditorConfig.EditorConfig"
+  ]
 }

@@ -1,11 +1,11 @@
-Move-Tasks v3
+move-tasks v3
 =====
 Action to move issues / PRs between project columns with some conditions
 
 **Features:**
 - 🚀 Super-fast with Github Graphql and restful APIs
 - ✨ Flexible use cases with our [Instructor Query](#instructor-query)
-- 🏭 A part of [TekuAsia](https://github.com/tekuasia) standard process (guideline coming soon)
+- 🏭 A part of [ABux](https://github.com/abux) standard process (guideline coming soon)
 
 **Table of contents:**
   + [Usage](#usage)
@@ -50,7 +50,7 @@ This is Github token with permission on Issues & Projects, which can be acquired
 
 Repository identifier, requires user / organization along (with examples)
   - user name/repo name (`hungluu/move-tasks`)
-  - org name/repo name (`tekuasia/blocks`)
+  - org name/repo name (`abux/labs`)
 
 #### Param `project`
 > type: number | string
@@ -119,9 +119,7 @@ toColumn: >
 
 Instructor Query
 -----
-<small>A part of [TekuAsia's building blocks](https://github.com/tekuasia/blocks)</small>
-
-Enable flexible approaches to retrieve resources based on [query definitions](#query-definitions) from data sources (customizable to each project) ([More information](https://github.com/tekuasia/blocks/tree/main/packages/instructor))
+Enable flexible approaches to retrieve resources based on [query definitions](#query-definitions) from data sources (customizable to each project) ([More information](https://github.com/abux/blocks/tree/main/packages/instructor))
 
 ### Query format
 
